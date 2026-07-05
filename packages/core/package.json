@@ -12,7 +12,7 @@
     }
   },
   "scripts": {
-    "build": "tsc && for f in src/personas/*/SKILL.md; do d=\"dist/personas/$(basename $(dirname $f))\"; [ -d \"$d\" ] && cp \"$f\" \"$d/\"; done && mkdir -p dist/agents/built-in && cp src/agents/built-in/*.agent.md dist/agents/built-in/",
+    "build": "tsc && node scripts/copy-build-assets.mjs",
     "dev": "tsc --watch",
     "clean": "rm -rf dist",
     "typecheck": "tsc --noEmit"
