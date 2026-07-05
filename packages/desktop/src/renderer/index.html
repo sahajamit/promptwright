@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- CSP removed for development - will be enforced by Electron BrowserWindow in production -->
+    <title>Promptwright</title>
+    <!-- Apply theme before paint to avoid a flash (default: dark) -->
+    <script>
+      (function () {
+        try {
+          var t = localStorage.getItem("pw-theme") || "dark";
+          if (t === "dark") document.documentElement.classList.add("dark");
+        } catch (e) {
+          document.documentElement.classList.add("dark");
+        }
+      })();
+    </script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./main.tsx"></script>
+  </body>
+</html>

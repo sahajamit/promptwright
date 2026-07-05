@@ -1,0 +1,26 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pnpm build*)",
+      "Bash(pnpm dev:*)",
+      "Bash(pnpm test:*)",
+      "Bash(pnpm clean*)",
+      "Bash(pnpm typecheck*)",
+      "Bash(pnpm sync:versions*)",
+      "Bash(pnpm install*)",
+      "Bash(pnpm --filter*)",
+      "Bash(pnpm --version*)",
+      "Bash(pnpm list:*)",
+      "Bash(pnpm ls:*)",
+      "Bash(pnpm package:desktop*)",
+      "Bash(node --version*)",
+      "Bash(node -e*)",
+      "Bash(which copilot*)",
+      "Bash(ls*)",
+      "WebSearch",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "WebFetch(domain:www.npmjs.com)"
+    ]
+  }
+}

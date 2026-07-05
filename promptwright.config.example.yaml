@@ -1,0 +1,119 @@
+# Promptwright Configuration
+# This file controls runtime settings for the application
+# Edit this file or use the app settings to customize behavior
+
+browser:
+  # Whether to run browser in headless mode
+  # true = headless (no visible browser window, faster execution)
+  # false = headed (visible browser window for watching/debugging)
+  headless: true
+  # Browser automation backend
+  # playwright-mcp = Rich tool integration via MCP protocol (default)
+  # playwright-cli = Token-efficient CLI commands via bash
+  automationMode: playwright-cli
+
+# Orchestrator settings
+orchestrator:
+  # Model to use for the orchestrator agent
+  # Leave empty or omit to use Copilot's default model
+  # Models with reasoning effort support: claude-opus-4.6, claude-opus-4.6-fast
+  model:
+  # Reasoning effort level for models that support it
+  # Options: low | medium | high | xhigh
+  # Leave empty to use the model's default
+  reasoningEffort:
+
+# Per-agent model overrides (optional)
+# agents:
+#   pw-mcp-agent:
+#     model: "claude-sonnet-4-5-20250514"
+#   api-test-agent:
+#     model: "claude-sonnet-4-5-20250514"
+
+# ---------------------------------------------------------------------------
+# Custom model provider (BYOK - Bring Your Own Key)  ★ login-less mode ★
+# ---------------------------------------------------------------------------
+# Promptwright uses GitHub Copilot purely as a bundled *harness*. When you set a
+# provider below (or the PROMPTWRIGHT_PROVIDER_API_KEY env var), the app runs
+# WITHOUT any GitHub Copilot login, license, or global `copilot` install - the
+# model comes from your own cloud key. Pick ONE of the presets below.
+#
+# You can configure the provider here, OR launch purely from environment
+# variables (no YAML needed) — handy for zero-cost local models:
+#   export PROMPTWRIGHT_PROVIDER_TYPE=openai
+#   export PROMPTWRIGHT_PROVIDER_BASE_URL=http://localhost:11434/v1
+#   export PROMPTWRIGHT_PROVIDER_MODEL=qwen2.5-coder:7b
+#   export PROMPTWRIGHT_PROVIDER_API_KEY=sk-...    # optional; not needed for Ollama
+#   export PROMPTWRIGHT_PROVIDER_BEARER_TOKEN=...  # optional; takes precedence
+# Config-file values win; env vars fill any gaps.
+
+# --- Preset 1: OpenAI-compatible (OpenAI, most gateways) ----------------
+# provider:
+#   type: openai                   # default; works for any OpenAI-compatible API
+#   baseUrl: https://api.openai.com/v1
+#   apiKey:                        # or PROMPTWRIGHT_PROVIDER_API_KEY
+#   model: gpt-4o
+#   displayName: "OpenAI GPT-4o"
+
+# --- Preset 2: Moonshot / Kimi — verified for agentic browser automation -
+# OpenAI-compatible; Kimi K2.5 emits proper structured tool calls and handles
+# the full Playwright-CLI agentic loop (open -> goto -> snapshot -> act).
+# provider:
+#   type: openai
+#   baseUrl: https://api.moonshot.ai/v1
+#   apiKey:                        # or export PROMPTWRIGHT_PROVIDER_API_KEY
+#   model: kimi-k2.5
+#   displayName: "Kimi K2.5"
+
+# --- Preset 3: Local Ollama — zero cost, fully offline (no key needed) ---
+# Run any model locally with `ollama pull <model>` then point Promptwright at it.
+# IMPORTANT for *agentic* use (tool calls): the model must emit structured
+# OpenAI tool_calls AND stay coherent under the agent's full toolset. In testing,
+# small local models struggled — qwen2.5-coder:7b returned tool calls as plain
+# text (not executed), and gemma "thinking" models returned empty content (and
+# their content:null tool turns are rejected by Ollama as
+# "invalid message content type: <nil>"). For agentic browser work prefer a
+# strong instruct model (larger Llama/Qwen instruct) or a hosted provider like
+# Moonshot above. Simple chat works with most local models.
+# provider:
+#   type: openai                   # Ollama exposes an OpenAI-compatible API
+#   baseUrl: http://localhost:11434/v1
+#   model: llama3.1:8b             # any locally pulled instruct model id
+#   displayName: "Ollama (local)"
+
+# --- Preset 3: Azure AI Foundry -----------------------------------------
+# provider:
+#   type: azure
+#   baseUrl: https://my-resource.openai.azure.com
+#   apiKey:                        # or PROMPTWRIGHT_PROVIDER_API_KEY
+#   azureApiVersion: "2024-10-21"
+#   model: gpt-4o                  # Azure deployment name
+#   displayName: "Azure GPT-4o"
+
+# --- Preset 4: Anthropic (Claude) ---------------------------------------
+# provider:
+#   type: anthropic
+#   baseUrl: https://api.anthropic.com
+#   apiKey:                        # or PROMPTWRIGHT_PROVIDER_API_KEY
+#   model: claude-sonnet-4-5
+#   displayName: "Claude Sonnet"
+
+# Optional advanced fields (any preset):
+#   bearerToken:                   # alt to apiKey; or PROMPTWRIGHT_PROVIDER_BEARER_TOKEN
+#   wireApi: completions           # openai/azure only: completions | responses
+#   wireModel:                     # wire name if it differs from `model`
+#   headers:                       # custom HTTP headers
+#     X-Custom-Header: value
+#   maxPromptTokens:               # override model default
+#   maxOutputTokens:               # override model default
+#
+# Note: AWS Bedrock is not a native provider type. Use an OpenAI-compatible
+# gateway (e.g. LiteLLM) with the OpenAI preset above. Native support tracked
+# as a follow-up.
+
+# Optional: Override Copilot CLI path
+# Use when Copilot is installed in a non-standard location not in PATH.
+# Can be either:
+#   - Full path to executable: C:\custom\bin\copilot.exe
+#   - Folder path (app resolves copilot/copilot.exe inside it): C:\custom\bin
+# copilotCliPath:

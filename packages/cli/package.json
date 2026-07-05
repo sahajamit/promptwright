@@ -1,0 +1,30 @@
+{
+  "name": "@promptwright/cli",
+  "version": "0.0.1",
+  "description": "Promptwright Command Line Interface",
+  "main": "./dist/index.js",
+  "type": "module",
+  "bin": {
+    "promptwright": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx src/index.ts",
+    "start": "node dist/index.js",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@promptwright/core": "workspace:*",
+    "chalk": "^5.3.0",
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

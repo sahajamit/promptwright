@@ -1,0 +1,219 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* =========================================================================
+   Theme tokens (RGB channels for Tailwind rgb(var(--x) / <alpha>) utilities)
+   Light = :root, Dark = .dark (default; set on <html> before paint).
+   ========================================================================= */
+@layer base {
+  :root {
+    --bg: 248 250 252;          /* slate-50  */
+    --surface: 255 255 255;     /* panels     */
+    --surface-2: 241 245 249;   /* slate-100  */
+    --border: 226 232 240;      /* slate-200  */
+    --border-strong: 203 213 225;
+    --text: 15 23 42;           /* slate-900  */
+    --text-muted: 100 116 139;  /* slate-500  */
+    --accent: 245 166 35;       /* #F5A623 orange */
+    --accent-2: 255 92 92;      /* #FF5C5C coral  */
+    --accent-fg: 26 18 7;       /* dark text on warm fills (legible) */
+    --ring: 245 166 35;
+    --success: 16 185 129;
+    --danger: 239 68 68;
+  }
+
+  .dark {
+    --bg: 11 15 23;             /* near-black slate */
+    --surface: 19 26 36;
+    --surface-2: 27 36 48;
+    --border: 40 51 65;
+    --border-strong: 58 71 90;
+    --text: 232 237 244;
+    --text-muted: 148 163 184;  /* slate-400 */
+    --accent: 245 166 35;
+    --accent-2: 255 92 92;
+    --accent-fg: 26 18 7;
+    --ring: 255 138 76;
+    --success: 52 211 153;
+    --danger: 248 113 113;
+  }
+
+  body {
+    background-color: rgb(var(--bg));
+    color: rgb(var(--text));
+  }
+}
+
+/* Custom scrollbar (theme-aware) */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgb(var(--surface-2));
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-strong));
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--text-muted));
+}
+
+/* Markdown styles (theme-aware) */
+.prose pre {
+  background-color: rgb(var(--surface-2));
+  border: 1px solid rgb(var(--border));
+  border-radius: 0.5rem;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+.prose code {
+  background-color: rgb(var(--surface-2));
+  color: rgb(var(--text));
+  padding: 0.125rem 0.25rem;
+  border-radius: 0.25rem;
+  font-size: 0.875em;
+}
+
+.prose pre code {
+  background-color: transparent;
+  padding: 0;
+}
+
+.prose :where(a):not(:where([class~="not-prose"] *)) {
+  color: rgb(var(--accent));
+}
+
+/* Animation for streaming cursor */
+@keyframes blink {
+
+  0%,
+  50% {
+    opacity: 1;
+  }
+
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+.streaming-cursor::after {
+  content: "▋";
+  animation: blink 1s infinite;
+  color: rgb(var(--accent));
+}
+
+/* Draggable title bar region */
+.titlebar-drag {
+  -webkit-app-region: drag;
+}
+
+.titlebar-no-drag {
+  -webkit-app-region: no-drag;
+}
+
+@keyframes spin-slow {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 3s linear infinite;
+}
+
+/* Enhanced scrollbar for execution logs */
+.logs-scroll-container {
+  scroll-behavior: smooth;
+  overflow-y: auto !important;
+}
+
+.logs-scroll-container::-webkit-scrollbar {
+  width: 10px !important;
+}
+
+.logs-scroll-container::-webkit-scrollbar-track {
+  background: rgb(var(--surface-2)) !important;
+  border-radius: 5px !important;
+  margin: 4px !important;
+}
+
+.logs-scroll-container::-webkit-scrollbar-thumb {
+  background: rgb(var(--border-strong)) !important;
+  border-radius: 5px !important;
+  border: 2px solid rgb(var(--surface-2)) !important;
+}
+
+.logs-scroll-container::-webkit-scrollbar-thumb:hover {
+  background: rgb(var(--text-muted)) !important;
+}
+
+/* Teal accent color for live indicator */
+.bg-teal-400 {
+  background-color: #2DD4BF;
+}
+
+.bg-teal-500 {
+  background-color: #14B8A6;
+}
+
+.text-teal-600 {
+  color: #0D9488;
+}
+
+/* New message highlight animation */
+@keyframes message-highlight {
+  0% {
+    background-color: rgba(20, 184, 166, 0.1);
+  }
+
+  100% {
+    background-color: transparent;
+  }
+}
+
+.animate-message-new {
+  animation: message-highlight 2s ease-out;
+}
+
+/* Modal animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.2s ease-out;
+}
+
+.animate-slideUp {
+  animation: slideUp 0.3s ease-out;
+}

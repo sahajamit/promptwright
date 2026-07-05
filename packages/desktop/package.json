@@ -1,0 +1,113 @@
+{
+  "name": "@promptwright/desktop",
+  "version": "0.0.1",
+  "description": "Promptwright Desktop Application",
+  "author": "Testron AI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sahajamit/jarvis-ai.git"
+  },
+  "main": "./dist/main/index.js",
+  "type": "module",
+  "scripts": {
+    "dev": "tsc -p tsconfig.preload.json && concurrently \"pnpm dev:main\" \"pnpm dev:preload\" \"pnpm dev:renderer\" \"pnpm dev:electron\"",
+    "dev:main": "tsc -p tsconfig.main.json --watch",
+    "dev:preload": "tsc -p tsconfig.preload.json --watch",
+    "dev:renderer": "vite",
+    "dev:electron": "wait-on http://localhost:5273 && cross-env NODE_ENV=development electron .",
+    "build": "pnpm build:main && pnpm build:preload && pnpm build:renderer",
+    "build:main": "tsc -p tsconfig.main.json",
+    "build:preload": "tsc -p tsconfig.preload.json --outDir dist",
+    "build:renderer": "vite build",
+    "start": "electron .",
+    "package": "electron-builder",
+    "clean": "rm -rf dist out src/preload.js src/preload.d.ts src/preload.js.map src/preload.d.ts.map",
+    "clean:port": "lsof -ti:5273 | xargs kill -9 || true",
+    "typecheck": "tsc -p tsconfig.main.json --noEmit && tsc -p tsconfig.renderer.json --noEmit",
+    "test:e2e": "playwright test",
+    "test:e2e:smoke": "playwright test --project=smoke",
+    "test:e2e:execution": "playwright test --project=execution"
+  },
+  "dependencies": {
+    "@playwright/mcp": "^0.0.61",
+    "@promptwright/core": "workspace:*",
+    "@xyflow/react": "^12.10.1",
+    "lucide-react": "^0.460.0",
+    "prism-react-renderer": "^2.4.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-markdown": "^10.1.0",
+    "react-resizable-panels": "^2.1.9",
+    "react-syntax-highlighter": "^15.6.0",
+    "remark-gfm": "^4.0.1"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.58.2",
+    "@tailwindcss/typography": "^0.5.19",
+    "@types/node": "^20.10.0",
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "@types/react-syntax-highlighter": "^15.5.0",
+    "@vitejs/plugin-react": "^4.2.0",
+    "autoprefixer": "^10.4.0",
+    "concurrently": "^9.0.0",
+    "cross-env": "^10.1.0",
+    "electron": "^33.0.0",
+    "electron-builder": "^25.0.0",
+    "postcss": "^8.4.0",
+    "tailwindcss": "^3.4.0",
+    "typescript": "^5.3.0",
+    "vite": "^6.0.0",
+    "wait-on": "^9.0.3"
+  },
+  "build": {
+    "appId": "com.testronai.promptwright",
+    "productName": "Promptwright",
+    "directories": {
+      "output": "release"
+    },
+    "files": [
+      "dist/**/*",
+      "assets/**/*"
+    ],
+    "extraResources": [
+      {
+        "from": "../../promptwright.config.example.yaml",
+        "to": "promptwright.config.yaml"
+      }
+    ],
+    "mac": {
+      "category": "public.app-category.developer-tools",
+      "icon": "assets/icon.icns"
+    },
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "assets/icon.ico",
+      "publisherName": "Testron AI"
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowElevation": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true,
+      "shortcutName": "Promptwright",
+      "artifactName": "${productName}-Setup-${version}.${ext}",
+      "installerIcon": "assets/icon.ico",
+      "uninstallerIcon": "assets/icon.ico"
+    },
+    "linux": {
+      "target": "AppImage",
+      "icon": "assets/icon.png"
+    }
+  }
+}

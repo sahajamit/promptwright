@@ -1,0 +1,18 @@
+diff --git a/package.json b/package.json
+index d0080b2ad03f6471915c5527bfd11debbbffeefa..068887b5ff393440ccd8699fccb373bdb09aaae1 100644
+--- a/package.json
++++ b/package.json
+@@ -16,6 +16,13 @@
+ 		"node": ">=14.0.0"
+ 	},
+ 	"main": "./lib/node/main.js",
++	"exports": {
++		".": "./lib/node/main.js",
++		"./node": "./node.js",
++		"./node.js": "./node.js",
++		"./browser": "./browser.js",
++		"./browser.js": "./browser.js"
++	},
+ 	"browser": {
+ 		"./lib/node/main.js": "./lib/browser/main.js"
+ 	},

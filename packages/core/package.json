@@ -1,0 +1,35 @@
+{
+  "name": "@promptwright/core",
+  "version": "0.0.1",
+  "description": "Core engine for Promptwright",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "scripts": {
+    "build": "tsc && for f in src/personas/*/SKILL.md; do d=\"dist/personas/$(basename $(dirname $f))\"; [ -d \"$d\" ] && cp \"$f\" \"$d/\"; done && mkdir -p dist/agents/built-in && cp src/agents/built-in/*.agent.md dist/agents/built-in/",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@github/copilot-sdk": "^1.0.1",
+    "@playwright/cli": "^0.1.14",
+    "chrome-launcher": "^1.1.0",
+    "ws": "^8.18.0",
+    "yaml": "^2.8.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@types/ws": "^8.5.13",
+    "typescript": "^5.3.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

@@ -1,0 +1,56 @@
+{
+  "name": "promptwright",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Promptwright - AI QA agent: prompt or record your browser workflows and turn them into runnable tests",
+  "scripts": {
+    "dev:cli": "pnpm --filter @promptwright/cli dev",
+    "dev:desktop": "pnpm --filter @promptwright/desktop dev",
+    "build": "pnpm -r build",
+    "build:cli": "pnpm --filter @promptwright/cli build",
+    "build:desktop": "pnpm --filter @promptwright/desktop build",
+    "package:desktop": "pnpm --filter @promptwright/desktop package",
+    "pkg": "pnpm package:desktop",
+    "pkg:mac": "pnpm package:desktop -- --mac",
+    "pkg:win": "./scripts/build-win-portable.sh",
+    "pkg:win-installer": "pnpm package:desktop -- --win nsis",
+    "pkg:all": "pnpm pkg:mac && pnpm pkg:win",
+    "pkg:full": "./scripts/build-packages-with-zscaler.sh",
+    "dist": "./scripts/create-distribution.sh",
+    "dist:full": "pnpm build && pnpm pkg:all && pnpm dist",
+    "test:e2e:prepare": "pnpm build && pnpm pkg:mac",
+    "test:e2e": "pnpm test:e2e:prepare && pnpm --filter @promptwright/desktop test:e2e",
+    "test:e2e:smoke": "pnpm --filter @promptwright/desktop test:e2e:smoke",
+    "test:e2e:execution": "pnpm --filter @promptwright/desktop test:e2e:execution",
+    "clean": "pnpm -r clean",
+    "typecheck": "pnpm -r typecheck",
+    "sync:versions": "node scripts/sync-versions.js",
+    "version:increment": "node scripts/version-increment.js"
+  },
+  "keywords": [
+    "promptwright",
+    "ai",
+    "qa",
+    "test-automation",
+    "playwright",
+    "agent",
+    "cli",
+    "electron"
+  ],
+  "author": "Testron AI",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sahajamit/jarvis-ai.git"
+  },
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "packageManager": "pnpm@9.0.0",
+  "pnpm": {
+    "patchedDependencies": {
+      "vscode-jsonrpc@8.2.1": "patches/vscode-jsonrpc@8.2.1.patch"
+    }
+  }
+}

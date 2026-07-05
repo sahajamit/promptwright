@@ -1,0 +1,91 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+out/
+*.tsbuildinfo
+
+# Desktop package compiled preload script (dev mode)
+packages/desktop/src/preload.js
+packages/desktop/src/preload.d.ts
+packages/desktop/src/preload.js.map
+packages/desktop/src/preload.d.ts.map
+
+# Electron
+release/
+*.dmg
+*.exe
+*.AppImage
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Test coverage
+coverage/
+
+# E2E test artifacts
+packages/desktop/e2e/screenshots/
+packages/desktop/playwright-report/
+packages/desktop/test-results/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Electron Builder Cache
+# We commit the .7z archives to support builds behind corporate firewalls
+# but ignore any extracted/working directories and large Electron distributions
+.electron-builder-cache/extracted/
+.electron-builder-cache/electron-win32-x64/
+.electron-builder-cache/electron-v*.zip
+.electron-builder-cache/.DS_Store
+
+# Manually extracted Electron distributions (should not live in project root)
+electron-v*-win32-x64/
+
+# Compiled binaries / libraries
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+packages/desktop/.playwright-cli/*
+.playwright-cli
+.playwright-mcp
+
+# Cleanup (some-cleanup): build/runtime artifacts and stale binaries that must
+# not be committed or travel to the public repo
+/index.js
+/jarvis-ai
+/binaries/
+/product-pitch/
+.electron-builder-cache/
+playwright-cli.json
+# generated playwright-cli launcher shim (written into the work dir at runtime)
+packages/desktop/playwright-cli
+
+# local migration plan — never ship this
+MIGRATION-PLAN.html
+
+# personal runtime config — ship only the .example
+promptwright.config.yaml
