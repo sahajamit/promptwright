@@ -2,11 +2,11 @@
   "name": "@promptwright/desktop",
   "version": "0.0.1",
   "description": "Promptwright Desktop Application",
-  "author": "Testron AI",
+  "author": "Amit Rawat",
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/sahajamit/jarvis-ai.git"
+    "url": "https://github.com/sahajamit/promptwright.git"
   },
   "main": "./dist/main/index.js",
   "type": "module",
@@ -62,7 +62,7 @@
     "wait-on": "^9.0.3"
   },
   "build": {
-    "appId": "com.testronai.promptwright",
+    "appId": "com.sahajamit.promptwright",
     "productName": "Promptwright",
     "directories": {
       "output": "release"
@@ -77,9 +77,31 @@
         "to": "promptwright.config.yaml"
       }
     ],
+    "publish": [
+      {
+        "provider": "github",
+        "owner": "sahajamit",
+        "repo": "promptwright"
+      }
+    ],
     "mac": {
       "category": "public.app-category.developer-tools",
-      "icon": "assets/icon.icns"
+      "icon": "assets/icon.icns",
+      "identity": null,
+      "target": [
+        {
+          "target": "dmg",
+          "arch": [
+            "arm64"
+          ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "arm64"
+          ]
+        }
+      ]
     },
     "win": {
       "target": [
@@ -88,10 +110,16 @@
           "arch": [
             "x64"
           ]
+        },
+        {
+          "target": "zip",
+          "arch": [
+            "x64"
+          ]
         }
       ],
       "icon": "assets/icon.ico",
-      "publisherName": "Testron AI"
+      "publisherName": "Amit Rawat"
     },
     "nsis": {
       "oneClick": false,

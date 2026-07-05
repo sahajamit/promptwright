@@ -1,0 +1,55 @@
+name: Release
+
+# Build the desktop app on each native OS and publish the binaries to a
+# GitHub Release (draft). Trigger by pushing a version tag, e.g.:
+#   git tag v0.0.1 && git push origin v0.0.1
+# ...or run manually from the Actions tab (workflow_dispatch) for a dry run.
+on:
+  push:
+    tags:
+      - "v*.*.*"
+  workflow_dispatch:
+
+permissions:
+  contents: write # needed for electron-builder to create/upload the Release
+
+jobs:
+  release:
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: macos-latest # Apple Silicon (arm64)
+            platform: mac
+          - os: windows-latest
+            platform: win
+          - os: ubuntu-latest
+            platform: linux
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build packages
+        run: pnpm build
+
+      - name: Package & publish (${{ matrix.platform }})
+        run: pnpm --filter @promptwright/desktop exec electron-builder --${{ matrix.platform }} --publish always
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # App is shipped unsigned for now; never let electron-builder hunt for a cert.
+          CSC_IDENTITY_AUTO_DISCOVERY: "false"

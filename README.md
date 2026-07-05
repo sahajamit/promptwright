@@ -23,6 +23,20 @@ Promptwright started life under Testron AI as a tool that turned a natural-langu
 
 ---
 
+## Download
+
+Grab the latest desktop build from the [**Releases**](https://github.com/sahajamit/promptwright/releases/latest) page. No npm, no build step. Once it's installed, point it at your model provider (see [Quick start](#quick-start) for BYOK setup) and you're going.
+
+> The app is currently **unsigned** (a code-signing certificate is on the roadmap), so your OS will warn you on first launch. The one-time steps below are expected and safe.
+
+- **macOS (Apple Silicon / M-series)** — download the `.dmg` and drag Promptwright to Applications. On first launch, **right-click the app → Open** (or run `xattr -dr com.apple.quarantine /Applications/Promptwright.app`) to get past Gatekeeper's "unidentified developer" prompt. *(Intel Macs are not built yet.)*
+- **Windows (x64)** — run `Promptwright-Setup-<version>.exe` (installer) or unzip the portable build. If SmartScreen appears, click **More info → Run anyway**.
+- **Linux** — download the `.AppImage`, then `chmod +x Promptwright-*.AppImage && ./Promptwright-*.AppImage`.
+
+Prefer to build from source instead? See [Quick start](#quick-start) below.
+
+---
+
 ## Why Promptwright
 
 Most "AI test" tools lock you into one vendor's model and a sign-in. Promptwright flips that:
