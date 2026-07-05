@@ -64,6 +64,7 @@
   "build": {
     "appId": "com.sahajamit.promptwright",
     "productName": "Promptwright",
+    "afterPack": "build/afterPack.cjs",
     "directories": {
       "output": "release"
     },
