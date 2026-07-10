@@ -28,11 +28,12 @@ Promptwright started life under Testron AI as a tool that turned a natural-langu
 Promptwright was demoed live on the [TestGuild podcast with Joe Colantonio](https://www.youtube.com/watch?v=2c7P4du6hDQ) (July 2026). The clip below jumps straight to the demo: BYOK settings, then a plain-English prompt driving a real browser end to end and coming back with a verdict and a Gherkin scenario.
 
 <p align="center">
-  <a href="https://www.youtube.com/watch?v=2c7P4du6hDQ&t=487s">
+  <a href="https://www.youtube.com/watch?v=2c7P4du6hDQ&t=524s">
     <img src="https://img.youtube.com/vi/2c7P4du6hDQ/maxresdefault.jpg" alt="Watch the Promptwright demo on the TestGuild podcast" width="640" />
   </a>
   <br/>
-  <i>▶ Watch the 5-minute demo segment (starts at 8:07)</i>
+  <i>▶ Watch the 5-minute demo segment (starts at 8:44)</i><br/>
+  Full episode: <a href="https://www.youtube.com/watch?v=2c7P4du6hDQ">https://www.youtube.com/watch?v=2c7P4du6hDQ</a>
 </p>
 
 ---
