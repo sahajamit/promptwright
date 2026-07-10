@@ -2,7 +2,7 @@
 # See CLAUDE.md and packages/*/CLAUDE.md for detailed coding instructions.
 # This file exists for Cursor IDE compatibility.
 
-# JARVIS-AI — QA Assistant powered by GitHub Copilot SDK
+# Promptwright — QA Assistant powered by GitHub Copilot SDK
 # TypeScript, pnpm monorepo, Electron + React, Playwright MCP, CDP
 
 ## Key Rules

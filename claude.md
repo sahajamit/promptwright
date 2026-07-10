@@ -1,8 +1,8 @@
-# JARVIS-AI Coding Instructions
+# Promptwright Coding Instructions
 
 ## Project Overview
 
-JARVIS-AI is a QA Assistant powered by GitHub Copilot SDK, available as both CLI and Electron Desktop app. It uses a **persona-based architecture** where different personas (Manual Test Execution, Record & Repeat) provide specialized AI agents with distinct capabilities via Model Context Protocol (MCP) servers.
+Promptwright (formerly JARVIS-AI) is a QA Assistant powered by GitHub Copilot SDK, available as both CLI and Electron Desktop app. It uses a **persona-based architecture** where different personas (Manual Test Execution, Record & Repeat) provide specialized AI agents with distinct capabilities via Model Context Protocol (MCP) servers.
 
 **Key Technologies**: TypeScript, pnpm workspace monorepo, GitHub Copilot SDK, Electron, React, Playwright MCP, Chrome DevTools Protocol (CDP)
 
